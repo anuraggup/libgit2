@@ -667,8 +667,10 @@ int git_odb_exists_prefix(
 			continue;
 
 		error = b->exists_prefix(&found, b, short_id, len);
-		if (error == GIT_ENOTFOUND || error == GIT_PASSTHROUGH)
+		if (error == GIT_ENOTFOUND || error == GIT_PASSTHROUGH) {
+			error = 0;
 			continue;
+		}
 		if (error)
 			return error;
 
